@@ -137,52 +137,10 @@ export const FilterModal = ({ isOpen, onClose, onApply }) => {
             unit=""
           />
 
-<<<<<<< HEAD
           <div className="flex flex-wrap justify-between gap-3 my-4">
-            {["bathroom", "livingRoom", "bedroom", "balcony"].map(
-              (type) => (
-                <div key={type} className="flex flex-wrap items-center my-2">
-                  <label className="block text-[10px] font-semibold capitalize text-[#525C76] leading-[16px] mr-2">
-                    {type}
-                  </label>
-                  <div className="flex items-center gap-1">
-                    <button
-                      onClick={() => {
-                        decrementFilter(`rooms.${type}`);
-                        setSelectedFilters((prev) => ({
-                          ...prev,
-                          rooms: {
-                            ...prev.rooms,
-                            [type]: Math.max((prev.rooms?.[type] || 0) - 1, 0),
-                          },
-                        }));
-                      }}
-                    >
-                      <Subtract />
-                    </button>
-                    <span className="text-[14px] align-middle font-semibold leading-[22.4px]">
-                      {selectedFilters.rooms?.[type] || 0}
-                    </span>
-                    <button
-                      onClick={() => {
-                        incrementFilter(`rooms.${type}`);
-                        setSelectedFilters((prev) => ({
-                          ...prev,
-                          rooms: {
-                            ...prev.rooms,
-                            [type]: (prev.rooms?.[type] || 0) + 1,
-                          },
-                        }));
-                      }}
-                    >
-                      <Add />
-                    </button>
-                  </div>
-=======
-          <div className="flex flex-wrap items-center justify-start gap-3 mb-4 space-y-2">
             {["bathroom", "livingRoom", "bedroom", "balcony"].map((type) => (
-              <div key={type} className="flex flex-wrap items-center gap-4">
-                <label className="block text-[10px] font-semibold capitalize text-[#525C76] leading-[16px]">
+              <div key={type} className="flex flex-wrap items-center my-2">
+                <label className="block text-[10px] font-semibold capitalize text-[#525C76] leading-[16px] mr-2">
                   {type}
                 </label>
                 <div className="flex items-center gap-1">
@@ -217,7 +175,6 @@ export const FilterModal = ({ isOpen, onClose, onApply }) => {
                   >
                     <Add />
                   </button>
->>>>>>> 6735d111983001cf931691bddcfced3256612053
                 </div>
               </div>
             ))}

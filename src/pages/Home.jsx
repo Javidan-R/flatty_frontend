@@ -91,19 +91,7 @@ const Home = () => {
 
       {/* Searchbar */}
       <div className="mb-4">
-        <SearchbarMobile
-          value={searchQuery}
-          onChange={handleSearchQueryChange}
-          onSearch={() => {
-            if (searchQuery.trim()) {
-              // Navigate to the search results page with the query parameter
-              navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-            } else {
-              // Navigate to the search results page without the query parameter
-              navigate("/search");
-            }
-          }}
-        />
+        <SearchbarMobile />
       </div>
     </div>
   );
@@ -123,23 +111,15 @@ const Home = () => {
         Unlocking Doors to Your Next Home
       </h1>
 
-      <div className="absolute z-20 bottom-[40%] left-[4%] max-w-[78%] px-4">
+      <div className="absolute z-20 bottom-[40%] left-[4%] w-[78%] px-4">
         <Searchbar
           value={searchQuery}
           onChange={handleSearchQueryChange}
-          onShowMap={() => {
-            if (searchQuery.trim()) {
-              navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-            } else {
-              navigate("/search");
-            }
-          }}
+          onShowMap={() => (window.location.href = "/map")}
           onSearch={() => {
-            if (searchQuery.trim()) {
-              navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-            } else {
-              navigate("/search");
-            }
+            window.location.href = `/search?query=${encodeURIComponent(
+              searchQuery
+            )}`;
           }}
           filters={{}}
         />

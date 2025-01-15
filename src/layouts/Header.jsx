@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "../components/Button";
 import {
+  ArrowDown,
   HeartEmpty,
   HeartFull,
   LogoDesktop,
@@ -48,11 +49,21 @@ const Header = () => {
   const location = useLocation(); // useLocation istifadə edirik
   const user = JSON.parse(localStorage.getItem("user"));
   const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
-  const [selectedCurrency, setSelectedCurrency] = useState(localStorage.getItem("currency") === null ? "£" : localStorage.getItem("currency"));
-  const currencies = ["£", "$", "€", "₺"]; // add any symbols you need
+  const [selectedCurrency, setSelectedCurrency] = useState({
+    symbol: localStorage.getItem("currency") || "£",
+    name: localStorage.getItem("currencyName") || "GBP",
+  });
+
+  const currencies = [
+    { symbol: "£", name: "GBP" },
+    { symbol: "$", name: "USD" },
+    { symbol: "€", name: "EUR" },
+    { symbol: "₺", name: "TRY" },
+  ];
 
   const handleCurrencyChange = (curr) => {
-    localStorage.setItem("currency", curr);
+    localStorage.setItem("currency", curr.symbol);
+    localStorage.setItem("currencyName", curr.name);
     setSelectedCurrency(curr);
     setCurrencyDropdownOpen(false);
     window.location.reload();
@@ -148,22 +159,27 @@ const Header = () => {
         <>
           <div className="relative">
             <button
-              className="flex items-center gap-1 px-3 py-2 bg-gray-100 border border-transparent rounded-md hover:border-gray-300"
+              className="flex justify-between  w-[104px] h-[35px] items-center gap-2 px-3 py-2 bg-gray-100 border border-transparent rounded-md hover:border-gray-300"
               onClick={() => setCurrencyDropdownOpen(!currencyDropdownOpen)}
             >
-              {selectedCurrency}
-              <span className="transform rotate-0">▼</span>
+              <span>{selectedCurrency.symbol}</span>
+              <span className="mx-1 text-[#525C76] text-[12p]">
+                {selectedCurrency.name}
+              </span>
+              <span className="transform rotate-0">
+                <ArrowDown />
+              </span>
             </button>
 
             {currencyDropdownOpen && (
               <div className="absolute left-0 mt-1 bg-white border rounded-md shadow-lg top-full w-100">
                 {currencies.map((curr) => (
                   <button
-                    key={curr}
+                    key={curr.name}
                     onClick={() => handleCurrencyChange(curr)}
                     className="block w-full px-3 py-2 text-left hover:bg-gray-100"
                   >
-                    {curr}
+                    <span>{curr.symbol}</span> <span>{curr.name}</span>
                   </button>
                 ))}
               </div>
@@ -212,22 +228,27 @@ const Header = () => {
         <>
           <div className="relative">
             <button
-              className="flex items-center gap-1 px-3 py-2 bg-gray-100 border border-transparent rounded-md hover:border-gray-300"
+              className="flex justify-between  w-[104px] h-[34px] items-center gap-2 px-3 py-2 bg-gray-100 border border-transparent rounded-md hover:border-gray-300"
               onClick={() => setCurrencyDropdownOpen(!currencyDropdownOpen)}
             >
-              {selectedCurrency}
-              <span className="transform rotate-0">▼</span>
+              <span>{selectedCurrency.symbol}</span>
+              <span className="mx-1 text-[#525C76] text-[12p]">
+                {selectedCurrency.name}
+              </span>
+              <span className="transform rotate-0">
+                <ArrowDown />
+              </span>
             </button>
 
             {currencyDropdownOpen && (
               <div className="absolute left-0 mt-1 bg-white border rounded-md shadow-lg top-full w-100">
                 {currencies.map((curr) => (
                   <button
-                    key={curr}
+                    key={curr.name}
                     onClick={() => handleCurrencyChange(curr)}
                     className="block w-full px-3 py-2 text-left hover:bg-gray-100"
                   >
-                    {curr}
+                    <span>{curr.symbol}</span> <span>{curr.name}</span>
                   </button>
                 ))}
               </div>
